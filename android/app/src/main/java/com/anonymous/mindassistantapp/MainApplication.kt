@@ -1,4 +1,4 @@
-package com.mindassistantapp
+package com.anonymous.mindassistantapp
 
 import android.app.Application
 import com.facebook.react.PackageList

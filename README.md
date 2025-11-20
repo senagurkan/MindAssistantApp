@@ -1,97 +1,143 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📱 Duygu Akışı – AI Günlük Asistanım  
+React Native + HuggingFace AI ile duygu analizi yapan kişisel günlük uygulaması
 
-# Getting Started
+Bu uygulama, kullanıcının yazdığı metni ücretsiz bir yapay zeka modeli ile analiz eder ve:  
+- **Duygu Durumu (Pozitif / Nötr / Negatif)**  
+- **Özet**  
+- **Öneri**  
+çıktıları üretir.  
+Tüm veriler cihazda **AsyncStorage** ile saklanır.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Özellikler
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 📝 Günlük Analizi
+- Kullanıcı metin yazar  
+- HuggingFace Inference API’ye gönderilir  
+- Model 5 sınıf döndürür  
+- Uygulama bunu **3 sınıfa indirger**
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### 📚 Geçmiş Ekranı
+- Tüm önceki günlük analizleri listelenir  
+- Duygu etiketi, tarih, özet, öneri ve orijinal metin görüntülenir  
 
-```sh
-# Using npm
-npm start
+### 💾  Depolama
+- AsyncStorage kullanılır  
+- Veriler cihazda saklanır  
+- Uygulama kapansa bile kayıtlar kaybolmaz  
 
-# OR using Yarn
-yarn start
+---
+
+## 🧠 Kullanılan AI Modeli
+
+**Model:** `tabularisai/multilingual-sentiment-analysis`  
+**API:** HuggingFace Inference API (ücretsiz)
+
+Model 5 adet duygu sınıfı döndürür:
+
+- Very Positive  
+- Positive  
+- Neutral  
+- Negative  
+- Very Negative  
+
+---
+
+## 🎛 Uygulamanın Kullandığı Mantık
+
+Model çıktıları **3 sınıfa indirgenir**:  
+**positive**, **neutral**, **negative**
+
+```ts
+if (top.includes("positive")) return "positive";
+if (top.includes("negative")) return "negative";
+return "neutral";
 ```
 
-## Step 2: Build and run your app
+### 📌 Dönüşüm Tablosu
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+| Modelin Çıktısı     | Uygulamadaki Karşılık |
+|---------------------|------------------------|
+| Very Positive       | positive               |
+| Positive            | positive               |
+| Neutral             | neutral                |
+| Negative            | negative               |
+| Very Negative       | negative               |
 
-### Android
+Bu sayede modern, minimal ve sade bir duygu göstergesi elde edilir.
 
-```sh
-# Using npm
-npm run android
+---
 
-# OR using Yarn
-yarn android
+## 🔐 Ortam Değişkenleri (.env)
+
+`HF_API_KEY` ve `HF_MODEL_URL` dosyadan okunur:
+
+```
+HF_API_KEY=YOUR_KEY
+HF_MODEL_URL=https://router.huggingface.co/hf-inference/models/tabularisai/multilingual-sentiment-analysis
 ```
 
-### iOS
+`.env` **GitHub'a yüklenmez**, projeyi çalıştıracak kişi kendi key'ini ekler.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+---
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## 📦 Kurulum
 
-```sh
-bundle install
+### 1. Bağımlılıkları yükleyin
+```
+npm install
 ```
 
-Then, and every time you update your native dependencies, run:
+### 2. Env dosyasını oluşturun
 
-```sh
-bundle exec pod install
+### 3.
+```
+npx react-native-asset
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### 4. Çalıştırın
 
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+**iOS**
+```
+npx react-native run-ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+**Android**
+```
+npx react-native run-android
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## 📂 Klasör Yapısı
 
-Now that you have successfully run the app, let's make changes!
+```
+src/
+  components/
+  context/
+  screens/
+  services/
+  utils/
+  assets/
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+---
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
 
-## Congratulations! :tada:
+## 📸 Ekran Görüntüleri ve Video Bağlantısı
 
-You've successfully run and modified your React Native App. :partying_face:
+https://drive.google.com/drive/folders/18UoaoeddpRssyRoU1FoNbedlG2cjIhdk?usp=sharing
+---
 
-### Now what?
+## 🧑‍💻 Geliştirici Notları
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- Tasarım yaklaşımı minimal bşr düzende kuruludur.  
+- Proje geliştirilirken yapay zekâdan faydalanılmıştır.
 
-# Troubleshooting
+---
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## 📄 Lisans
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Bu proje eğitim amaçlı geliştirilmiştir.

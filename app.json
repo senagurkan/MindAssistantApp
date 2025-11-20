@@ -1,4 +1,11 @@
 {
   "name": "MindAssistantApp",
-  "displayName": "MindAssistantApp"
+  "displayName": "MindAssistantApp",
+  "icon": "./src/assets/icon.png",
+  "android": {
+    "package": "com.anonymous.mindassistantapp"
+  },
+  "ios": {
+    "bundleIdentifier": "com.anonymous.mindassistantapp"
+  }
 }

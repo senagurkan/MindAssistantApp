@@ -1,45 +1,68 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DailyEntryScreen } from './src/screens/DailyEntryScreen';
+import { HistoryScreen } from './src/screens/HistoryScreen';
+import { JournalProvider } from './src/context/JournalContext';
+import { TouchableOpacity, Text } from 'react-native';
+import { DefaultTheme } from '@react-navigation/native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+export type RootStackParamList = {
+  DailyEntry: undefined;
+  History: undefined;
+};
 
-  return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'white',
   },
-});
+};
+
+
+const App = () => {
+  return (
+    <JournalProvider>
+      <NavigationContainer>
+      <Stack.Navigator
+  screenOptions={{
+    headerTitleStyle: {
+      fontFamily: 'Montserrat-Bold',
+      fontSize: 13,
+    },
+    headerBackTitleStyle: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 13,
+    },
+  }}
+>
+          <Stack.Screen
+            name="DailyEntry"
+            component={DailyEntryScreen}
+            options={({ navigation }) => ({
+              title: 'Mind Assistant',
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('History')}>
+                  <Text style={{ color: '#4C6FFF', fontWeight: '600' }}>Geçmiş</Text>
+                </TouchableOpacity>
+              ),
+            })}
+          />
+          <Stack.Screen
+            name="History"
+            component={HistoryScreen}
+            options={{
+              title: 'Mind Assistant',
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </JournalProvider>
+  );
+};
 
 export default App;

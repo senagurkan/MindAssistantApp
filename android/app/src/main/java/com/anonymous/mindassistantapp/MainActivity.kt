@@ -1,4 +1,4 @@
-package com.mindassistantapp
+package com.anonymous.mindassistantapp
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

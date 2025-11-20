@@ -128,7 +128,7 @@ src/
 
 ## 📸 Ekran Görüntüleri ve Video Bağlantısı
 
-https://drive.google.com/drive/folders/18UoaoeddpRssyRoU1FoNbedlG2cjIhdk?usp=sharing
+- https://drive.google.com/drive/folders/18UoaoeddpRssyRoU1FoNbedlG2cjIhdk?usp=sharing
 ---
 
 ## 🧑‍💻 Geliştirici Notları

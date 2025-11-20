@@ -133,8 +133,8 @@ https://drive.google.com/drive/folders/18UoaoeddpRssyRoU1FoNbedlG2cjIhdk?usp=sha
 
 ## 🧑‍💻 Geliştirici Notları
 
-- Tasarım yaklaşımı minimal bşr düzende kuruludur.  
-- Proje geliştirilirken yapay zekâdan faydalanılmıştır.
+- Tasarım yaklaşımı minimal bir düzende kuruludur.  
+- Proje geliştirilirken yapay zekadan faydalanılmıştır.
 
 ---
 
